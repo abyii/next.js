@@ -5,7 +5,7 @@ import '../node-environment'
 
 import {
   buildAppStaticPaths,
-  buildStaticPaths,
+  buildPagesStaticPaths,
   reduceAppConfig,
 } from '../../build/utils'
 import { collectSegments } from '../../build/segment-config/app/app-segments'
@@ -19,6 +19,7 @@ import {
   type ExperimentalPPRConfig,
 } from '../lib/experimental/ppr'
 import { InvariantError } from '../../shared/lib/invariant-error'
+import { collectRootParams } from '../../build/segment-config/app/collect-root-params'
 
 type RuntimeConfig = {
   pprConfig: ExperimentalPPRConfig | undefined
@@ -92,12 +93,13 @@ export async function loadStaticPaths({
       isAppPageRouteModule(components.routeModule) &&
       checkIsRoutePPREnabled(config.pprConfig, reduceAppConfig(segments))
 
+    const rootParams = collectRootParams(components)
+
     return buildAppStaticPaths({
       dir,
       page: pathname,
       dynamicIO: config.dynamicIO,
       segments,
-      configFileName: config.configFileName,
       distDir,
       requestHeaders,
       cacheHandler,
@@ -110,6 +112,7 @@ export async function loadStaticPaths({
       isRoutePPREnabled,
       buildId,
       authInterrupts,
+      rootParams,
     })
   } else if (!components.getStaticPaths) {
     // We shouldn't get to this point since the worker should only be called for
@@ -119,7 +122,7 @@ export async function loadStaticPaths({
     )
   }
 
-  return buildStaticPaths({
+  return buildPagesStaticPaths({
     page: pathname,
     getStaticPaths: components.getStaticPaths,
     configFileName: config.configFileName,

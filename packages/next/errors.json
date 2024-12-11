@@ -525,5 +525,8 @@
   "524": "A default cacheLife profile must always be provided. This is a bug in Next.js.",
   "525": "cache: 'no-store' used on fetch for %s with 'export const fetchCache = 'only-cache'",
   "526": "Invariant: did not expect response writer to be written to for upgrade request",
-  "527": "Route %s used \"unstable_rootParams\" inside \"use cache\". This is not currently supported."
+  "527": "Route %s used \"unstable_rootParams\" inside \"use cache\". This is not currently supported.",
+  "528": "App config not found",
+  "529": "Page not found",
+  "530": "A required parameter (%s) was not provided as %s received %s in getStaticPaths for %s"
 }
