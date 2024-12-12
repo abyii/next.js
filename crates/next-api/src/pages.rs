@@ -868,6 +868,7 @@ impl PageEndpoint {
             let reduced_graphs = get_reduced_graphs_for_endpoint(
                 this.pages_project.project(),
                 *ssr_module,
+                ty == SsrChunkType::Page,
                 Vc::upcast(this.pages_project.client_module_context()),
             );
             let next_dynamic_imports = reduced_graphs
