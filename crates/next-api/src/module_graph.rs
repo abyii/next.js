@@ -553,9 +553,6 @@ impl SingleModuleGraph {
     ) -> Result<Vc<Self>> {
         SingleModuleGraph::new_inner(Some(root), &entries, &*visited_modules.await?).await
     }
-
-    // #[turbo_tasks::function]
-    // async fn new_
 }
 
 /// Implements layout segment optimization to compute a graph "chain" for each layout segment
